@@ -6,9 +6,13 @@ Python的functools模块
 
 python3 魔术方法
 
-日期和时间
+日期和时间（pytz模块）
 
 多线程	√
+
+线程池
+
+yield
 
 装饰器	√
 
@@ -26,7 +30,9 @@ Python3 object类中的特殊方法
 
 常用标准库、三方库总结
 
-socket
+socket			√
+
+websocket	√
 
 WSGI
 
