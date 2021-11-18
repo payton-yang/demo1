@@ -95,6 +95,7 @@ def get_header():
 
 if __name__ == '__main__':
     header = get_header()
+    print(header)
     try:
         kws = all_likes()
         total = len(kws)
