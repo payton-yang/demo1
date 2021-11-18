@@ -83,7 +83,6 @@ def sign(kw, tbs):
 def get_header():
     stoken = os.getenv('STOKEN')
     bduss = os.getenv('BDUSS')
-    print(os.environ)
     header = {
         "Accept": "application/json",
         "Content-Type": "application/json",
@@ -96,7 +95,6 @@ def get_header():
 
 if __name__ == '__main__':
     header = get_header()
-    print(header)
     try:
         kws = all_likes()
         total = len(kws)
