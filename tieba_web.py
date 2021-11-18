@@ -97,9 +97,11 @@ if __name__ == '__main__':
     header = get_header()
     try:
         kws = all_likes()
+        total = len(kws)
+        print(f'获取到{total}个吧')
     except Exception as e:
         print(e.__repr__())
-        print('get likes tieba failed')
+        print('获取贴吧列表失败')
         sys.exit()
     sign_failure = []
     n = 0
@@ -122,7 +124,7 @@ if __name__ == '__main__':
             if flag:
                 print(kw)
                 continue
-            print(f'sign failure: {kw}')
+            print(f'签到失败: {kw}')
         except Exception as e:
             print(e.__repr__())
             continue
