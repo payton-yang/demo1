@@ -29,11 +29,11 @@ jobs:
           # Version range or exact version of a Python version to use, using SemVer's version range syntax.
           python-version: 3.8
       - name: Install dependencies
-        env:
-          STOKEN: ${{ secrets.TIEBA_STOKEN }}
-          BDUSS: ${{ secrets.TIEBA_BDUSS }}
         run: 
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: Run script
+        env:
+          STOKEN: ${{ secrets.TIEBA_STOKEN }}
+          BDUSS: ${{ secrets.TIEBA_BDUSS }}
         run: python tieba_web.py
