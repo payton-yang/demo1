@@ -83,6 +83,7 @@ def sign(kw, tbs):
 def get_header():
     stoken = os.getenv('STOKEN')
     bduss = os.getenv('BDUSS')
+    print(os.environ)
     header = {
         "Accept": "application/json",
         "Content-Type": "application/json",
