@@ -108,6 +108,7 @@ if __name__ == '__main__':
                 print(kw)
         except Exception as e:
             sign_failure.append(kw)
+            continue
     for kw in sign_failure:
         try:
             tbs = get_tbs(kw)
@@ -116,6 +117,6 @@ if __name__ == '__main__':
                 print(kw)
                 continue
             print(f'sign failure: {kw}')
-
         except Exception as e:
             print(e.__repr__())
+            continue
