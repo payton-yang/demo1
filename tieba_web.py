@@ -1,5 +1,6 @@
 import re
 import os
+import sys
 import time
 import urllib.parse
 from requests_html import HTMLSession
@@ -94,7 +95,12 @@ def get_header():
 
 if __name__ == '__main__':
     header = get_header()
-    kws = all_likes()
+    try:
+        kws = all_likes()
+    except Exception as e:
+        print(e.__repr__())
+        print('get likes tieba failed')
+        sys.exit()
     sign_failure = []
     n = 0
     for kw in kws:
