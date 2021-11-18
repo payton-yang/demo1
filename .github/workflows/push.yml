@@ -22,18 +22,18 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
-      # Runs a single command using the runners shell
-      - name: Config env
-        env:
-          STOKEN:${{ secrets.STOKEN }}
-          BDUSS:${{ secrets.BDUSS }}
+        
       - name: Setup Python
         uses: actions/setup-python@v2.3.0
         with:
           # Version range or exact version of a Python version to use, using SemVer's version range syntax.
           python-version: 3.8
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        env:
+          STOKEN:${{ secrets.STOKEN }}
+          BDUSS:${{ secrets.BDUSS }}
+        run: 
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
       - name: Run script
         run: python tieba_web.py
