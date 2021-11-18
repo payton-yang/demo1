@@ -19,4 +19,4 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: 'sign'
-        run: python tieba_web.py
+        run: python teiba_web.py
