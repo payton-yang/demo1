@@ -1,24 +1,14 @@
 import re
+import os
 import time
 import urllib.parse
-
 from requests_html import HTMLSession
 
-STOKEN = 'f87ad4cbc9645335094eb2cc750eb5822958857650f2717d035766a60fbeaafd'
-BDUSS = 'DJIM2tzdnZ5WGpwbU9ySWFiWjRndGpVVFpwT2RyNWFKcFdKclI2OXMtYmZkSlJoRVFBQUFBJCQAAAAAAAAAAAEAAAC2A-~E1-66w9LgysfX7rCuAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN~nbGHf52xhe'
-
 session = HTMLSession()
-header = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-    "Host": "tieba.baidu.com",
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36",
-    "Cookie": "BDUSS=DJIM2tzdnZ5WGpwbU9ySWFiWjRndGpVVFpwT2RyNWFKcFdKclI2OXMtYmZkSlJoRVFBQUFBJCQAAAAAAAAAAAEAAAC2A-~E1-66w9LgysfX7rCuAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN~nbGHf52xhe; STOKEN=f87ad4cbc9645335094eb2cc750eb5822958857650f2717d035766a60fbeaafd"
-}
 
 
 def likes_200():
-    resp = session.post('https://tieba.baidu.com/mo/q/newmoindex', headers=header)
+    resp = session.get('https://tieba.baidu.com/mo/q/newmoindex', headers=header)
     if resp.status_code == 200:
         data = resp.json()
         likes = data['data']['like_forum']
@@ -28,13 +18,6 @@ def likes_200():
 
 
 def likes_last():
-    header = {
-        'Referer': 'http://tieba.baidu.com/i/i/forum',
-        'Accept': 'text/html, */*; q=0.01',
-        'Cookie': 'BDUSS=DJIM2tzdnZ5WGpwbU9ySWFiWjRndGpVVFpwT2RyNWFKcFdKclI2OXMtYmZkSlJoRVFBQUFBJCQAAAAAAAAAAAEAAAC2A-~E1-66w9LgysfX7rCuAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN~nbGHf52xhe;STOKEN=f87ad4cbc9645335094eb2cc750eb5822958857650f2717d035766a60fbeaafd;',
-        'Host': 'tieba.baidu.com',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36'
-    }
     t = int(round(time.time() * 1000))
     url = 'http://tieba.baidu.com/f/like/mylike'
     resp = session.get(url, params={'v': t}, headers=header)
@@ -96,10 +79,43 @@ def sign(kw, tbs):
     return False
 
 
+def get_header():
+    stoken = os.getenv('STOKEN')
+    bduss = os.getenv('BDUSS')
+    header = {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Host": "tieba.baidu.com",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36",
+        "Cookie": f"BDUSS={bduss}; STOKEN={stoken}"
+    }
+    return header
+
+
 if __name__ == '__main__':
+    header = get_header()
     kws = all_likes()
+    sign_failure = []
+    n = 0
     for kw in kws:
-        tbs = get_tbs(kw)
-        flag = sign(kw, tbs)
-        if flag:
-            print(kw)
+        n += 1
+        if (n % 6) == 0:
+            time.sleep(0.05)
+        try:
+            tbs = get_tbs(kw)
+            flag = sign(kw, tbs)
+            if flag:
+                print(kw)
+        except Exception as e:
+            sign_failure.append(kw)
+    for kw in sign_failure:
+        try:
+            tbs = get_tbs(kw)
+            flag = sign(kw, tbs)
+            if flag:
+                print(kw)
+                continue
+            print(f'sign failure: {kw}')
+
+        except Exception as e:
+            print(e.__repr__())
