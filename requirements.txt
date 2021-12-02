@@ -1,2 +1,2 @@
 urllib3==1.25.11
-requests-html==0.10.0
+requests-html=哒哒哒哒哒哒=0.10.0
