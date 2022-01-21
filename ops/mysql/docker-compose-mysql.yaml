@@ -1,7 +1,7 @@
 version: '2'
 services:
   mysql:
-    network_mode: "bridge"
+    container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: "password"
       MYSQL_USER: 'test'
