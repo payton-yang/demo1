@@ -10,7 +10,7 @@ services:
     restart: always
     volumes:
       - "./data:/var/lib/mysql"
-      - "./mysql.cnf:/etc/my.cnf"
-      - "./init.sql:/docker-entrypoint-initdb.d/"
+      - "./conf:/etc/my.cnf"
+      - "./init:/docker-entrypoint-initdb.d/"
     ports:
       - "3307:3306"
