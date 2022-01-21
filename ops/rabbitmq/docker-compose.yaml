@@ -1,16 +1,16 @@
-version: '2'
+version: '3'
+
 services:
-  mysql:
-    container_name: mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: "password"
-      MYSQL_USER: 'test'
-      MYSQL_PASS: 'password'
-    image: "mysql:5.7"
+  rabbit:
+    image: rabbitmq:3.8-management
+    hostname: rabbit1
+    container_name: rabbit1
     restart: always
-    volumes:
-      - "./data:/var/lib/mysql"
-      - "./conf:/etc/my.cnf"
-      - "./init:/docker-entrypoint-initdb.d/"
     ports:
-      - "3307:3306"
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+    volumes:
+      - ./data:/var/lib/rabbitmq
