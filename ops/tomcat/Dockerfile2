@@ -1,0 +1,6 @@
+#使用的基础镜像
+FROM tomcat:8.5
+#启动时运行tomcat
+CMD ["catalina.sh", "run"]
+#设置启动命令
+#ENTRYPOINT ["/usr/local/tomcat/bin/catalina.sh","run"]

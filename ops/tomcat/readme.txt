@@ -12,7 +12,7 @@ tomcat: wget https://mirrors.tuna.tsinghua.edu.cn/apache/tomcat/tomcat-9/v9.0.58
 -t 表示打标签
 
 3. docker run -d -p 8080:8080 tomcat-web
-3. docker run -d -p 8080:8002 tomcat-web
+3. docker run -d -p 8082:8082 tomcat-web --name=tomcat-web
 
 
 wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.58/bin/apache-tomcat-9.0.58.tar.gz
