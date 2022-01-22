@@ -1,16 +1,15 @@
 version: '2'
 services:
-  mysql:
-    container_name: mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: "password"
-      MYSQL_USER: 'test'
-      MYSQL_PASS: 'password'
-    image: "mysql:5.7"
-    restart: always
-    volumes:
-      - "./data:/var/lib/mysql"
-      - "./conf:/etc/my.cnf"
-      - "./init:/docker-entrypoint-initdb.d/"
-    ports:
-      - "3307:3306"
+    postgres:
+      container_name: postgres-db
+      image: 'postgres:latest'
+      environment:
+        POSTGRES_PASSWORD: password
+        PGDATA: /var/lib/postgresql/data/pgdata
+        TZ: 'Asia/Shanghai'
+      restart: always
+      volumes:
+        - './data.sql:/docker-entrypoint-initdb.d/init.sql'
+        - './data:/var/lib/postgresql/data/pgdata'
+      ports:
+        - "5432:5432"
