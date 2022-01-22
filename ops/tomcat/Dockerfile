@@ -3,9 +3,9 @@ MAINTAINER payton
 
 #add jdk and tomcat software
 ADD openjdk-11+28_linux-x64_bin.tar.gz /usr/local/
-RUN mv /usr/local/openjdk-11+28_linux-x64_bin.tar.gz /usr/local/openjdk-11
+RUN mv /usr/local/openjdk-11+28_linux-x64_bin /usr/local/openjdk-11
 ADD apache-tomcat-9.0.58-src.tar.gz /usr/local/
-RUN mv /usr/local/apache-tomcat-9.0.58-src.tar.gz /usr/local/tomcat-9.0.58
+RUN mv /usr/local/apache-tomcat-9.0.58-src /usr/local/tomcat-9.0.58
 ADD index.jsp /usr/local/apache-tomcat-9.0.58/webapps/ROOT/
 
 #config java and tomcat ENV
