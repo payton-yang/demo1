@@ -1,0 +1,28 @@
+version: "3"
+services:
+  nginx:
+    image: nginx:1.14
+    restart: always
+    ports:
+      - "80:80"
+    links:
+      - tomcat1:tomcat1
+      - tomcat2:tomcat2
+    volumes:
+      - ./webserver:/webserver
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - tomcat1
+      - tomcat2
+  tomcat1:
+    hostname: tomcat1
+    build: ./tomcat
+    volumes:
+      - ./webserver/tomcatA:/usr/local/apache-tomcat-8.5.31/webapps/ROOT
+      - ./etc/localtime:/etc/localtime
+  tomcat2:
+    hostname: tomcat2
+    build: ./tomcat
+    volumes:
+      - ./webserver/tomcatB:/usr/local/apache-tomcat-8.5.31/webapps/ROOT
+      - ./etc/localtime:/etc/localtime
