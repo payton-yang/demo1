@@ -16,5 +16,6 @@ ENV PATH $PATH:$JAVA_HOME/bin:$CATALINA_HOME/bin
 EXPOSE 8080
 
 #config startup command of tomcat
-CMD /usr/local/apache-tomcat-9.0.58-src/bin/catalina.sh run
+CMD chmod -R 777 /usr/local && \
+    /usr/local/apache-tomcat-9.0.58-src/bin/catalina.sh run
 
