@@ -17,4 +17,4 @@ ENV PATH $PATH:$JAVA_HOME/bin:$CATALINA_HOME/lib:$CATALINA_HOME/bin
 #设置暴露的端口
 EXPOSE 8080
 #运行tomcat
-CMD /usr/local/tomcat/apache-tomcat-9.0.58-src/bin/startup.sh && tail -f /usr/local/tomcat/apache-tomcat-9.0.58-src/logs/catalina.out
+CMD chmod -R 777 /usr/local && /usr/local/tomcat/apache-tomcat-9.0.58-src/bin/startup.sh && tail -f /usr/local/tomcat/apache-tomcat-9.0.58-src/logs/catalina.out
