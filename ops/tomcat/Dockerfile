@@ -1,6 +1,20 @@
 FROM centos
-ADD jdk-8u144-linux-x64.tar.gz /usr/local
-ENV JAVA_HOME /usr/local/jdk1.8.0_144
-ADD apache-tomcat-8.5.31.tar.gz /usr/local
+MAINTAINER payton
+
+#add jdk and tomcat software
+ADD openjdk-11+28_linux-x64_bin.tar.gz /usr/local/
+ADD apache-tomcat-9.0.58-src.tar.gz /usr/local/
+ADD index.jsp /usr/local/apache-tomcat-9.0.58/webapps/ROOT/
+
+#config java and tomcat ENV
+ENV JAVA_HOME /usr/local/openjdk-11+28_linux-x64_bin
+ENV CLASSPATH $JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+ENV CATALINA_HOME /usr/local/apache-tomcat-9.0.58/
+ENV PATH $PATH:$JAVA_HOME/bin:$CATALINA_HOME/bin
+
+#config listen port of tomcat
 EXPOSE 8080
-ENTRYPOINT ["/usr/local/apache-tomcat-8.5.31/bin/catalina.sh", "run"]
+
+#config startup command of tomcat
+CMD /usr/local/apache-tomcat-9.0.58/bin/catalina.sh run
+
