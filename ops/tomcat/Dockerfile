@@ -11,4 +11,4 @@ ENV PATH $PATH:$JAVA_HOME/bin:$CATALINA_HOME/bin
 #暴露8082端口
 EXPOSE 8082
 #启动时运行tomcat
-CMD ["/docker_home/local/tomcat9/bin/catalina.sh","run"]
+CMD chmod -R 777 /docker_home/local && /docker_home/local/tomcat9/bin/catalina.sh run
