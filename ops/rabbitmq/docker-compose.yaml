@@ -3,7 +3,7 @@ version: '3'
 services:
   rabbit:
     image: rabbitmq:3.8-management
-    hostname: rabbit1
+    hostname: rabbit1  # rabbit存储数据的标识，方便后续查找数据
     container_name: rabbit1
     restart: always
     ports:
