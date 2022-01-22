@@ -7,3 +7,8 @@ jdk: wget https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_linux-x64_bin
 
 tomcat: wget https://mirrors.tuna.tsinghua.edu.cn/apache/tomcat/tomcat-9/v9.0.58/src/apache-tomcat-9.0.58-src.tar.gz
 重命名 mv apache-tomcat-9.0.58-src.tar.gz tomcat-9.0.58.tar.gz
+
+2. docker build -t tomcat-web .
+-t 表示打标签
+
+3. docker run -d -p 8080:8080 tomcat-web

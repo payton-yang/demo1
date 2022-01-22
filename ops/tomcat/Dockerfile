@@ -2,9 +2,9 @@ FROM centos
 MAINTAINER payton
 
 #add jdk and tomcat software
-ADD openjdk-11.tar.gz /usr/local/
-ADD tomcat-9.0.58.tar.gz /usr/local/
-ADD index.jsp /usr/local/tomcat-9.0.58/webapps/ROOT/
+COPY openjdk-11.tar.gz /usr/local/
+COPY tomcat-9.0.58.tar.gz /usr/local/
+COPY index.jsp /usr/local/tomcat-9.0.58/webapps/ROOT/
 
 #config java and tomcat ENV
 ENV JAVA_HOME /usr/local/openjdk-11
