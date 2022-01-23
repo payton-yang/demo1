@@ -1,19 +1,18 @@
 version: '3'
 services:
-  mysql:
-    container_name: mysql
+  postgres:
+    container_name: postgres-db
+    image: 'postgres:latest'
     environment:
-      MYSQL_ROOT_PASSWORD: "password"
-      MYSQL_USER: 'test'
-      MYSQL_PASS: 'password'
-    image: "mysql:5.7"
+      POSTGRES_PASSWORD: password
+      PGDATA: /var/lib/postgresql/data/pgdata
+      TZ: 'Asia/Shanghai'
     restart: always
     volumes:
-      - "./mysql/data:/var/lib/mysql"
-      - "./mysql/conf:/etc/my.cnf"
-      - "./mysql/init:/docker-entrypoint-initdb.d/"
+      - './postgres/data.sql:/docker-entrypoint-initdb.d/init.sql'
+      - './postgres/data:/var/lib/postgresql/data/pgdata'
     ports:
-      - "3307:3306"
+      - "5432:5432"
   redis:
     image: redis:latest
     container_name: redis
@@ -56,6 +55,6 @@ services:
     ports:
       - "8080:8000"
     depends_on:
-      - mysql
+      - postgres
       - rabbitmq
       - redis

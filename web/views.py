@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from web.models import Feedback
+from utils.try_catch import MyExcept
 from my_async_tasks.async_task import test_create_file
 
 
@@ -19,6 +20,7 @@ class TestAsyncTaskView(APIView):
 
 
 class FeedbackView(APIView):
+    @MyExcept()
     def post(self, request):
         json_data = json.loads(request.body)
         if not json_data:
