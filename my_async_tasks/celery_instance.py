@@ -2,22 +2,22 @@ import os
 
 from celery import Celery, platforms
 
-from my_task import celery_config
+from my_async_tasks import celery_config
 
 platforms.C_FORCE_ROOT = True
-DEV = 0
-PROD = 1
+
+PROD = 0
 if PROD:
     RABBIT_MQ_USER = "payton"
     RABBIT_MQ_PASSWORD = "payton"
     RABBIT_MQ_PORT = 5673
-if DEV:
+else:
     RABBIT_MQ_USER = "root"
     RABBIT_MQ_PASSWORD = "root"
     RABBIT_MQ_PORT = 5672
 RABBIT_MQ_IP = "127.0.0.1"
 # 必须填写 否则会报错: cannot load settings
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_fjisu_task.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
 
 app = Celery(
     "celery",

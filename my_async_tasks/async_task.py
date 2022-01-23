@@ -5,7 +5,7 @@ from datetime import datetime
 from celery import shared_task
 
 
-@shared_task(name='aysnc_add_file')
+@shared_task(name='async_add_file')
 def test_create_file(file_name='payton'):
     """
     创建文件

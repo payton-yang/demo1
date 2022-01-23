@@ -4,10 +4,17 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from web.models import Feedback
+from my_async_tasks.async_task import test_create_file
 
 
 class TestView(APIView):
     def get(self, request):
+        return Response(data={'code': 200, 'data': 'Async task started,Congratulations!!!'})
+
+
+class TestAsyncTaskView(APIView):
+    def get(self, request):
+        test_create_file.delay()
         return Response(data={'code': 200, 'data': 'success test,Congratulations!!!'})
 
 
