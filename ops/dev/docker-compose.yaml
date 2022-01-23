@@ -48,12 +48,11 @@ services:
         rabbitmqctl set_permissions -p broker root ".*" ".*" ".*"&&
         wait
   web:
-    container_name: python-3.6
+    container_name: python-3.8
     build: .
     restart: always
     ports:
-      - "5000:8000"
-      - "8001:8001"
+      - "8080:8000"
     depends_on:
       - db
       - rabbitmq
