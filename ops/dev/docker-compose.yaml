@@ -49,7 +49,9 @@ services:
         wait
   web:
     container_name: python-3.8
-    build: .
+    build:
+      context: ../../
+      dockerfile: ops/dev/Dockerfile
     restart: always
     ports:
       - "8080:8000"
