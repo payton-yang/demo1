@@ -26,6 +26,7 @@ services:
       /bin/bash -c "redis-server /usr/local/etc/redis/redis.conf "
   rabbitmq:
     image: rabbitmq:3.8-management
+    container_name: rabbitmq
     hostname: rabbit1
     ports:
       - "5672:5672"
