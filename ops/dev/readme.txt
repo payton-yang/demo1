@@ -11,3 +11,5 @@ Dockfile-2  使用uwsgi部署项目
 docker-compose build --no-cache && docker-compose up -d
 docker rmi $(docker images -f "dangling=true" -q)
 docker-compose up -d
+
+docker build -f Dockerfile-django -t django .
