@@ -59,4 +59,3 @@ services:
       - postgres
       - rabbitmq
       - redis
-      - django
