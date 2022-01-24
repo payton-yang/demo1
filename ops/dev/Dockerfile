@@ -1,4 +1,4 @@
-FROM django
+FROM dev_django
 
 ENV PYTHONUNBUFFERED=1
 
