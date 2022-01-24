@@ -47,12 +47,6 @@ services:
         rabbitmqctl set_permissions -p backend root ".*" ".*" ".*"&&
         rabbitmqctl set_permissions -p broker root ".*" ".*" ".*"&&
         wait
-  django:
-    container_name: django
-    build:
-      context: ../../
-      dockerfile: ops/dev/Dockerfile-django
-    restart: always
   web:
     container_name: python-3.8
     build:
