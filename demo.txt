@@ -5,11 +5,10 @@ payton在github上进行的改动。
 ddddddddddd
 1111
 
-廖雪峰git教学学习提交。
-
-
-刚才提交错了，再来一次！
-
-
-revert操作
+rebase
+rebase
+rebase
+rebase
+rebase
+rebase
 
