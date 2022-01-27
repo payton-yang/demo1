@@ -6,18 +6,13 @@ from my_async_tasks import celery_config
 
 platforms.C_FORCE_ROOT = True
 
-PROD = 0
-if PROD:
-    RABBIT_MQ_USER = "payton"
-    RABBIT_MQ_PASSWORD = "payton"
-    RABBIT_MQ_PORT = 5673
-else:
-    RABBIT_MQ_USER = "root"
-    RABBIT_MQ_PASSWORD = "root"
-    RABBIT_MQ_PORT = 5672
+RABBIT_MQ_USER = "root"
+RABBIT_MQ_PASSWORD = "root"
+RABBIT_MQ_PORT = 5672
 RABBIT_MQ_IP = "127.0.0.1"
 # 必须填写 否则会报错: cannot load settings
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
+# os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.local')
 
 app = Celery(
     "celery",
@@ -30,5 +25,5 @@ app.config_from_object(celery_config, silent=True, force=True)
 
 # app.autodiscover_tasks(['my_task'], 'async_task')
 # celery worker -A async_task.celery_instance -l info --pool=solo   error
-# celery -A my_task.celery_instance worker -l info --pool=solo 正确启动
-# celery -A my_task.celery_instance beat -l info  定时任务
+# celery -A my_async_tasks.celery_instance worker -l info --pool=solo 正确启动
+# celery -A my_async_tasks.celery_instance beat -l info  定时任务

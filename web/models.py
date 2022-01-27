@@ -1,5 +1,5 @@
 import time
-
+from enum import Enum
 from django.db import models
 
 
@@ -15,6 +15,26 @@ class BaseModel(models.Model):
 
     class Meta:
         abstract = True
+
+
+class TaskType(Enum):
+    ASYNC = 'async task'
+    TIMED = 'timed task'
+    UNKNOWN = 'unknown task'
+
+
+class Tasks(BaseModel):
+    TYPE = [
+        (0, 'async task'),
+        (1, 'timed task'),
+        (-1, 'unknown task'),
+    ]
+    task_name = models.CharField(verbose_name='名称', max_length=200, null=False, blank=False)
+    type = models.CharField(verbose_name='状态', max_length=20, null=False, blank=False, choices=TYPE,
+                            default=TaskType.UNKNOWN.value)
+
+    class Meta:
+        db_table = 'tasks'
 
 
 class Feedback(BaseModel):

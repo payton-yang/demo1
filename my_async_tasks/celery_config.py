@@ -1,5 +1,4 @@
 from kombu import Exchange, Queue
-
 # default exchange
 default_exchange = Exchange('default', type='direct')
 
@@ -48,8 +47,8 @@ CELERYBEAT_SCHEDULE = {
         "schedule": 10,  # 这也是10秒跑一次
         "args": (12, 32)
     },
-    "cron_add_file": {
-        "task": "cron_add_file",
+    "cron_add_task": {
+        "task": "cron_add_task",
         "schedule": 5,  # 5秒跑一次
         "args": ()
     },
