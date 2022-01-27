@@ -18,3 +18,4 @@ docker rmi $(docker images -f "dangling=true" -q)
 
 # 指定文件构建
 docker build -f Dockerfile-django -t django .
+
