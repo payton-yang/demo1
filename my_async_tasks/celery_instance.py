@@ -11,8 +11,8 @@ RABBIT_MQ_PASSWORD = "root"
 RABBIT_MQ_PORT = 5672
 RABBIT_MQ_IP = "127.0.0.1"
 # 必须填写 否则会报错: cannot load settings
-# os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.local')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.dev')
+# os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.local')
 
 app = Celery(
     "celery",
