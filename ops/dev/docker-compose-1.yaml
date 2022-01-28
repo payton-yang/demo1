@@ -13,6 +13,16 @@ services:
       - './postgres/data:/var/lib/postgresql/data/pgdata'
     ports:
       - "5432:5432"
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    restart: always
+    ports:
+      - "9001:9001"
+    volumes:
+      - ./webserver:/webserver
+      - static:/mydata/static/
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
   redis:
     image: redis:latest
     container_name: redis
@@ -61,5 +71,6 @@ services:
       - postgres
       - rabbitmq
       - redis
+      - nginx
 volumes:
     static:
