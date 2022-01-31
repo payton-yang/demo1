@@ -29,8 +29,8 @@ CELERYD_PREFETCH_MULTIPLIER = 1
 CELERY_DISABLE_RATE_LIMITS = True  # 任务发出后，经过一段时间还未收到acknowledge , 就将任务重新交给其他worker执行
 
 CELERY_IMPORTS = [
-    "my_async_tasks.async_task",
-    "my_async_tasks.cron",
+    "my_tasks.async_task",
+    "my_tasks.cron",
 ]
 
 CELERY_ROUTES = (

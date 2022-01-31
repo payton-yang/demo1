@@ -26,5 +26,5 @@ app.config_from_object(celery_config, silent=True, force=True)
 
 # app.autodiscover_tasks(['my_task'], 'async_task')
 # celery worker -A async_task.celery_instance -l info --pool=solo   error
-# celery -A my_async_tasks.celery_instance worker -l info --pool=solo 正确启动
-# celery -A my_async_tasks.celery_instance beat -l info  定时任务
+# celery -A my_tasks.celery_instance worker -l info --pool=solo 正确启动
+# celery -A my_tasks.celery_instance beat -l info  定时任务
