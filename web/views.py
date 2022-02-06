@@ -1,5 +1,7 @@
 import json
+from datetime import datetime
 
+from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
@@ -40,3 +42,15 @@ class FeedbackView(APIView):
             return Response(data={'code': 200, 'data': 'WTF....Bang Bang gives you two punches....'})
 
         return Response(data={'code': 200, 'data': 'A smart kid!!!'})
+
+
+class TestRedisCache(APIView):
+    def get(self, request):
+        """
+        渲染HTML文件，当请求成功时，HTML文件返回请求时间
+        使用Redis作为缓存
+        :param request:
+        :return:
+        """
+        now = str(datetime.now())
+        return render(request, 'test_redis.html', locals())

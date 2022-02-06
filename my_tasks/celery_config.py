@@ -1,4 +1,5 @@
 from kombu import Exchange, Queue
+
 # default exchange
 default_exchange = Exchange('default', type='direct')
 
