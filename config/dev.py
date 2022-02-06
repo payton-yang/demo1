@@ -2,6 +2,7 @@ import os
 
 from .settings import *
 
+ALLOWED_HOSTS = ['127.0.0.1', '116.62.27.195']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
