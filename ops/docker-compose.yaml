@@ -1,0 +1,70 @@
+version: '3'
+services:
+  postgres:
+    container_name: postgres-db
+    image: 'postgres:latest'
+    environment:
+      POSTGRES_PASSWORD: password
+      PGDATA: /var/lib/postgresql/data/pgdata
+      TZ: 'Asia/Shanghai'
+    restart: always
+    volumes:
+      - './postgres/data.sql:/docker-entrypoint-initdb.d/init.sql'
+      - './postgres/data:/var/lib/postgresql/data/pgdata'
+    ports:
+      - "5432:5432"
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    restart: always
+    ports:
+      - "8080:8080"
+    volumes:
+      - /mydata/app/demo1:/mydata/app/demo1
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf:rw
+      - ./redis/data:/data:rw
+    command:
+      /bin/bash -c "redis-server /usr/local/etc/redis/redis.conf"
+  rabbitmq:
+    image: rabbitmq:3.8-management
+    container_name: rabbitmq
+    hostname: my_rabbit
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    restart: always
+    volumes:
+      - ./rabbitmq/data:/var/lib/rabbitmq
+    command:
+      - sh
+      - -c
+      - >
+        rabbitmq-server&
+        sleep 15&&
+        rabbitmqctl add_vhost backend&&
+        rabbitmqctl add_vhost broker&&
+        rabbitmqctl add_user root root&&
+        rabbitmqctl set_user_tags root administrator&&
+        rabbitmqctl set_permissions -p backend root ".*" ".*" ".*"&&
+        rabbitmqctl set_permissions -p broker root ".*" ".*" ".*"&&
+        wait
+  web:
+    container_name: python-3.8
+    build:
+      context: ../
+      dockerfile: ops/Dockerfile
+    restart: always
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - rabbitmq
+      - redis
