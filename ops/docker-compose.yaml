@@ -38,7 +38,7 @@ services:
     container_name: rabbitmq
     hostname: my_rabbit
     ports:
-      - "5672:5672"
+      - "5673:5672"
       - "15672:15672"
     restart: always
     volumes:

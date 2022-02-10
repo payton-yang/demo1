@@ -9,13 +9,13 @@ DATABASES = {
         'NAME': 'test2',
         'USER': 'postgres',
         'PASSWORD': 'password',
-        'HOST': '172.17.0.1',
+        'HOST': 'postgres',
         'PORT': 5432,
     }
 }
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-REDIS_SERVER = '172.17.0.1'  # 数据库IP或域名
+REDIS_SERVER = 'redis'  # 数据库IP或域名
 CACHES = {
     # 缓存view数据
     "default": {

@@ -8,9 +8,9 @@ platforms.C_FORCE_ROOT = True
 
 RABBIT_MQ_USER = "root"
 RABBIT_MQ_PASSWORD = "root"
-RABBIT_MQ_PORT = 5672
+RABBIT_MQ_PORT = 5673
 # RABBIT_MQ_IP = "127.0.0.1"
-RABBIT_MQ_IP = "172.17.0.1"  # docker容器的IP地址
+RABBIT_MQ_IP = "rabbitmq"  # docker容器的IP地址
 # 必须填写 否则会报错: cannot load settings
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.dev')
 # os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.local')
