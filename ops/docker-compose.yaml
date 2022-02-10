@@ -68,3 +68,6 @@ services:
       - postgres
       - rabbitmq
       - redis
+networks:
+  my-net:
+    driver: bridge
