@@ -13,6 +13,10 @@ services:
       - './postgres/data:/var/lib/postgresql/data/pgdata'
     ports:
       - "5432:5432"
+    networks:
+      my-net:
+        aliases:
+          - postgres
   nginx:
     container_name: nginx
     image: nginx:latest
@@ -22,6 +26,10 @@ services:
     volumes:
       - /mydata/app/demo1:/mydata/app/demo1
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      my-net:
+        aliases:
+          - nginx
   redis:
     image: redis:latest
     container_name: redis
@@ -31,6 +39,10 @@ services:
     volumes:
       - ./redis/redis.conf:/usr/local/etc/redis/redis.conf:rw
       - ./redis/data:/data:rw
+    networks:
+      my-net:
+        aliases:
+          - redis
     command:
       /bin/bash -c "redis-server /usr/local/etc/redis/redis.conf"
   rabbitmq:
@@ -43,6 +55,10 @@ services:
     restart: always
     volumes:
       - ./rabbitmq/data:/var/lib/rabbitmq
+    networks:
+      my-net:
+        aliases:
+          - rabbitmq
     command:
       - sh
       - -c
@@ -68,6 +84,10 @@ services:
       - postgres
       - rabbitmq
       - redis
+    networks:
+      my-net:
+        aliases:
+          - web
 networks:
   my-net:
     driver: bridge
