@@ -23,7 +23,7 @@ CACHES = {
         "LOCATION": "redis://" + REDIS_SERVER + ":6379/0",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
-            "PASSWORD": "",  # 数据库密码
+            "PASSWORD": "12345678",  # 数据库密码
         }
     },
 }
