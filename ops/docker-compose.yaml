@@ -59,19 +59,14 @@ services:
       my-net:
         aliases:
           - rabbitmq
-    command:
-      - sh
-      - -c
-      - >
-        rabbitmq-server&
-        sleep 15&&
-        rabbitmqctl add_vhost backend&&
-        rabbitmqctl add_vhost broker&&
-        rabbitmqctl add_user root root&&
-        rabbitmqctl set_user_tags root administrator&&
-        rabbitmqctl set_permissions -p backend root ".*" ".*" ".*"&&
-        rabbitmqctl set_permissions -p broker root ".*" ".*" ".*"&&
-        wait
+    environment:
+      RABBITMQ_DEFAULT_VHOST: broker
+      RABBITMQ_DEFAULT_USER: root
+      RABBITMQ_DEFAULT_PASS: root
+      RABBITMQ_LOGS: /var/lib/rabbitmq/rabbitmq.log
+      RABBITMQ_SASL_LOGS: /var/lib/rabbitmq/rabbitmq-sasl.log
+      RABBITMQ_ERLANG_COOKIE: LZJADKXKLULIXFKAALGX
+      TZ: Asia/Shanghai
   web:
     container_name: python-3.8
     build:
