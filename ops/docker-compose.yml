@@ -38,6 +38,15 @@ services:
       RABBITMQ_SASL_LOGS: /var/lib/rabbitmq/rabbitmq-sasl.log
       RABBITMQ_ERLANG_COOKIE: LZJADKXKLULIXFKAALGX
       TZ: Asia/Shanghai
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    restart: always
+    ports:
+      - "9001:80"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
   api:
     container_name: python-3.8
     ports:
