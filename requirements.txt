@@ -13,3 +13,7 @@ typing-extensions==4.1.1
 vine==1.3.0
 zipp==3.6.0
 uWSGI==2.0.20
+gevent
+supervisor
+gunicorn
+django-redis

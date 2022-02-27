@@ -23,28 +23,26 @@ services:
       - "6379:6379"
 
   rabbitmq:
-    image: rabbitmq:3.7
+    image: 3.8-management
     ports:
       - "5672:5672"
       - "15672:15672"
     restart: always
-    command:
-      - sh
-      - -c
-      - >
-        rabbitmq-server&
-        sleep 15&&
-        rabbitmqctl add_vhost backend&&
-        rabbitmqctl add_vhost broker&&
-        rabbitmqctl add_user root root&&
-        rabbitmqctl set_user_tags root administrator&&
-        rabbitmqctl set_permissions -p backend root ".*" ".*" ".*"&&
-        rabbitmqctl set_permissions -p broker root ".*" ".*" ".*"&&
-        wait
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_VHOST: broker
+      RABBITMQ_DEFAULT_USER: root
+      RABBITMQ_DEFAULT_PASS: root
+      RABBITMQ_LOGS: /var/lib/rabbitmq/rabbitmq.log
+      RABBITMQ_SASL_LOGS: /var/lib/rabbitmq/rabbitmq-sasl.log
+      RABBITMQ_ERLANG_COOKIE: LZJADKXKLULIXFKAALGX
+      TZ: Asia/Shanghai
   api:
     container_name: python-3.8
     ports:
       - "8000:8000"
+      - "9002:9001"
     depends_on:
       - rabbitmq
       - db
@@ -56,3 +54,4 @@ services:
 
 volumes:
   postgres_data:
+  rabbitmq_data:
