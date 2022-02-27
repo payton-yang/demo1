@@ -1,8 +1,8 @@
 version: '3.4'
 services:
   db:
-    container_name: postgres-db
-    image: 'postgres:11.4'
+    container_name: demo-db
+    image: postgres:latest
     environment:
       POSTGRES_PASSWORD: U2RN82C46KD!
       PGDATA: /var/lib/postgresql/data/pgdata
@@ -16,14 +16,16 @@ services:
 
   redis:
     restart: always
-    image: redis:5.0.0
-    container_name: redis-db
+    image: redis:latest
+    container_name: demo-redis
     command: redis-server --requirepass password
     ports:
       - "6379:6379"
 
   rabbitmq:
     image: 3.8-management
+    container_name: demo-rabbitmq
+    hostname: my_rabbit
     ports:
       - "5672:5672"
       - "15672:15672"
@@ -39,11 +41,13 @@ services:
       RABBITMQ_ERLANG_COOKIE: LZJADKXKLULIXFKAALGX
       TZ: Asia/Shanghai
   nginx:
-    container_name: nginx
+    container_name: demo-nginx
     image: nginx:latest
     restart: always
     ports:
-      - "9001:80"
+      - "8001:80"
+    depends_on:
+      - api
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
