@@ -4,11 +4,12 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /usr/src/app
 COPY requirements.txt ./
+COPY ops/sources.list /etc/apt/sources.list
 RUN  rm -Rf /var/lib/apt/lists/* && apt-get update && \
      pip3 install --no-cache-dir -r requirements.txt
 COPY . .
 CMD python3 manage.py migrate --settings config.prod && \
-    cp ./ops/supervisor /etc/supervisor && \
+    cp ops/supervisor /etc/supervisor && \
     supervisord -c /etc/supervisor/supervisord.conf && \
     supervisorctl reread && \
     supervisorctl update && \
