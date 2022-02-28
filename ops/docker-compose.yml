@@ -23,7 +23,7 @@ services:
       - "6379:6379"
 
   rabbitmq:
-    image: 3.8-management
+    image: rabbitmq:3.8-management
     container_name: demo-rabbitmq
     hostname: my_rabbit
     ports:
