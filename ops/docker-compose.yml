@@ -47,6 +47,7 @@ services:
     ports:
       - "8001:80"
     volumes:
+      - ../static:/myapp/static
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
   api:
