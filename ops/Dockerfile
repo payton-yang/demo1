@@ -10,7 +10,7 @@ RUN  rm -Rf /var/lib/apt/lists/* && apt-get update && \
      pip install --no-cache-dir -r requirements.txt
 COPY . .
 CMD python manage.py migrate --settings config.prod && \
-    cp -r ops/supervisor /etc/supervisor && \
+    cp -r ops/supervisor/* /etc/supervisor/ && \
     echo_supervisord_conf > /etc/supervisor/supervisord.conf && \
     supervisord && \
     supervisorctl reread && \
