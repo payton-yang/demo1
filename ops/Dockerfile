@@ -11,8 +11,8 @@ RUN  rm -Rf /var/lib/apt/lists/* && apt-get update && \
 COPY . .
 CMD python manage.py migrate --settings config.prod && \
     mkdir /etc/supervisor && \
-    cp -r ops/supervisor/* /etc/supervisor && \
     echo_supervisord_conf > /etc/supervisor/supervisord.conf && \
+    cp -r ops/supervisor/* /etc/supervisor && \
     supervisord && \
     supervisorctl reread && \
     supervisorctl update && \
