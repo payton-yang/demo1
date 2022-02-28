@@ -52,7 +52,7 @@ services:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
   api:
-    container_name: python-3.8
+    container_name: demo-py38
     ports:
       - "8000:8000"
       - "9002:9001"
