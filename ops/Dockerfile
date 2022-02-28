@@ -13,4 +13,4 @@ CMD python manage.py migrate --settings config.prod && \
     cp ops/supervisor /etc/supervisor && \
     supervisord -c /etc/supervisor/supervisord.conf && \
     supervisorctl reread && \
-    supervisorctl update && \
+    supervisorctl update
