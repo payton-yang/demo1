@@ -105,8 +105,8 @@ def analyze(fname: str):
 
 async def main():
     fname = '孙笑川'
-    # await statistic(fname)
-    analyze(fname)
+    await statistic(fname)
+    # analyze(fname)
 
 
 if __name__ == "__main__":

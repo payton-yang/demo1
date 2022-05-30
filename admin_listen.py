@@ -4,6 +4,7 @@ import functools
 import re
 import time
 from collections.abc import Callable
+from typing import Union
 
 import yaml
 
@@ -60,7 +61,7 @@ class Context(object):
         self._args = None
         self._cmd_type = None
         self.this_permission: int = 0
-        self.parent: tb.Thread | tb.Post = None
+        self.parent: Union[tb.Thread, tb.Post] = None
         self.note: str = ''
 
     async def _init(self) -> bool:
