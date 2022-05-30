@@ -15,6 +15,7 @@ __*/
 
 config/*
 !config/config-example.yaml
+!config/config.yaml
 !config/listen_config-example.yaml
 
 log/
@@ -30,3 +31,4 @@ test*
 !/admin_listen.py
 !/cloud_review_hanime.py
 !/data_spider.py
+!/tieba_sign.py

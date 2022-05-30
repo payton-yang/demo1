@@ -1,0 +1,19 @@
+BDUSS:
+  # BDUSS_key快捷调用BDUSS 这样你就不用每次都填一串很长的东西进去了: 把你的那一串长长的BDUSS放在这
+  default: DJIM2tzdnZ5WGpwbU9ySWFiWjRndGpVVFpwT2RyNWFKcFdKclI2OXMtYmZkSlJoRVFBQUFBJCQAAAAAAAAAAAEAAAC2A-~E1-66w9LgysfX7rCuAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN~nbGHf52xhe
+
+STOKEN:
+  default: f87ad4cbc9645335094eb2cc750eb5829622920de4bf2eee0c6cea1f2aec068d # 可以不填, 如果是登录需要填写此值
+
+database:
+  host: 127.0.0.1
+  port: 3306
+  user: # 填用户名
+  password: # 填密码
+  db: tieba_cloud_review # 使用的数据库名，不填则默认为tieba_cloud_review
+  unix_socket: /var/lib/mysql/mysql.sock # 用于优化linux系统的本机连接速度，看不懂就不用填
+  pool_recycle: 3600 # 填连接超时的秒数，需要与服务端保持一致，不填则默认为28800秒
+
+fname_mapping:
+  # 贴吧中文名: 自定义的英文名
+  lol半价: halfprice
