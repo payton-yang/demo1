@@ -27,7 +27,7 @@ async def main2():
 async def sign_all():
     async with tb.Client("default") as brow:
         ret = []
-        pn = 2
+        pn = 1
         has_more = True
         while has_more:
             res_list, has_more = await brow.get_self_forum_list(pn)
